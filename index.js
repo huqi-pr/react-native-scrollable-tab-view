@@ -13,9 +13,8 @@ const {
   InteractionManager,
 } = ReactNative;
 
-const ViewPagerAndroid = require('@react-native-community/viewpager');
 const TimerMixin = require('react-timer-mixin');
-const ViewPager = require('@react-native-community/viewpager');
+const ViewPager = require('react-native-pager-view').default;
 
 const SceneComponent = require('./SceneComponent');
 const DefaultTabBar = require('./DefaultTabBar');
@@ -64,6 +63,7 @@ const ScrollableTabView = createReactClass({
       scrollWithoutAnimation: false,
       locked: false,
       prerenderingSiblingsNumber: 0,
+      style:{},
     };
   },
 
@@ -387,8 +387,13 @@ const ScrollableTabView = createReactClass({
     if (this.props.tabBarUnderlineStyle) {
       tabBarProps.underlineStyle = this.props.tabBarUnderlineStyle;
     }
+    /** add tabBarProps style  */
+    if (this.props.style) {
+      tabBarProps.style = this.props.style;
+    }
     if (overlayTabs) {
       tabBarProps.style = {
+        ...tabBarProps.style,
         position: 'absolute',
         left: 0,
         right: 0,
